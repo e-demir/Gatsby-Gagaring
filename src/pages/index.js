@@ -1,9 +1,35 @@
 import React from "react"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
+import './index.css'
 
-const IndexPage = () => (
-  <div>
+const IndexPage = ({ data }) => {
+  console.log(data)
+  return <div>
     <h1>This page is about cosmos news!</h1>
+
+    <div className="photos">
+      {data.allFile.edges.map(({ node }) => {
+        return <Img key={node.id} fluid={node.childImageSharp.fluid} />      
+      })}
+    </div>
   </div>
-)
+}
+export const pageQuery = graphql`
+query MyQuery {
+  allFile(filter: {absolutePath: {regex: "/photos/"}}) {
+    edges {
+      node {
+        id
+        childImageSharp{
+          fluid{
+             ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  }
+}
+`
 
 export default IndexPage
