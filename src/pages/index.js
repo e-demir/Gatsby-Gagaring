@@ -6,7 +6,8 @@ import './index.css'
 const IndexPage = ({ data }) => {
   console.log(data)
   return <div>
-    <h1>This page is about cosmos news!</h1>
+    <h1>Hello Universe!</h1>
+    <p>PhotoBlog about our earth, our home</p>
 
     <div className="photos">
       {data.allFile.edges.map(({ node }) => {
